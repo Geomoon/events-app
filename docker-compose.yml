@@ -1,0 +1,30 @@
+networks:
+  events-network-test:
+
+services:
+  api:
+    image: events-api
+    container_name: events-api-api-1
+    # image: node:20
+    build:
+      context: ./events-api/.
+      dockerfile: Dockerfile
+    networks:
+      - events-network-test
+    ports:
+      - "3002:3002"
+    # command: ["cat", "package.json"]
+  web:
+    image: events-app
+    container_name: events-api-web-1
+    # image: node:20
+    build:
+      context: ./events-app/.
+      dockerfile: Dockerfile
+    networks:
+      - events-network-test
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    # command: ["npm", "run", "start"]

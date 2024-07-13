@@ -13,6 +13,8 @@ services:
       - events-network-test
     ports:
       - "3002:3002"
+    depends_on:
+      - db
     # command: ["cat", "package.json"]
   web:
     image: events-app
@@ -28,3 +30,16 @@ services:
     depends_on:
       - api
     # command: ["npm", "run", "start"]
+  db:
+    image: postgres:latest
+    container_name: postgres_container
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:

@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { EventRepository } from './event.repository';
 import { CreateEventDTO } from './dto/create-event.dto';
 import { IdDTO } from '../shared/id.dto';
+import { EventFirestoreRepository } from './event.firestore';
 
 @Injectable()
 export class EventService {
-  constructor(private readonly repository: EventRepository) {}
+  constructor(private readonly repository: EventFirestoreRepository) {}
 
   async getAll() {
     return await this.repository.getAll();

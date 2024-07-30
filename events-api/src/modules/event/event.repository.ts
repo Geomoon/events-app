@@ -1,10 +1,9 @@
-import { Injectable } from '@nestjs/common';
 import { EntityRepository } from '../shared/entity.repository';
 import { Event } from './event.entity';
 
 import { v4 } from 'uuid';
 
-@Injectable()
+// @Injectable()
 export class EventRepository implements EntityRepository<Event, string> {
   private data: Event[] = [];
 

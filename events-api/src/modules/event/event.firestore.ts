@@ -46,11 +46,8 @@ export class EventFirestoreRepository
   }
 
   async save(entity: Event): Promise<string> {
-    console.log(entity);
-
     const id = v4();
     entity.id = id;
-    this.data.push(entity);
 
     const collection = this.store.collection('events');
     await collection.doc().set(entity);

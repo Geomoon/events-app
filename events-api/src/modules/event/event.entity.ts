@@ -1,19 +1,23 @@
 import { Column, Entity } from 'typeorm';
 
-@Entity('events')
+@Entity({ name: 'events' })
 export class Event {
-  @Column('uuid', { name: 'id', primary: true })
+  @Column('uuid', {
+    name: 'even_id',
+    primary: true,
+    default: () => 'gen_random_uuid()',
+  })
   id?: string;
 
-  @Column('string', { name: 'name' })
+  @Column('varchar', { name: 'even_name' })
   name?: string;
 
-  @Column('timestamp', { name: 'date' })
+  @Column('timestamp', { name: 'even_date' })
   date?: Date;
 
-  @Column('number', { name: 'maxCapacity' })
+  @Column('integer', { name: 'even_max_capacity' })
   maxCapacity?: number;
 
-  @Column('boolean', { name: 'isActive', default: true })
+  @Column('boolean', { name: 'even_is_active', default: true })
   isActive?: boolean;
 }

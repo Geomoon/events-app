@@ -1,19 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { CreateEventDTO } from './dto/create-event.dto';
 import { IdDTO } from '../shared/id.dto';
-import { EventFirestoreRepository } from './event.firestore';
+import { Event } from './event.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class EventService {
-  constructor(private readonly repository: EventFirestoreRepository) {}
+  constructor(
+    @InjectRepository(Event)
+    private readonly repository: Repository<Event>,
+  ) {}
 
   async getAll() {
-    return await this.repository.getAll();
+    return await this.repository.find();
   }
 
   async create(data: CreateEventDTO): Promise<IdDTO> {
-    const id = await this.repository.save(data);
-    return { id };
+    const saved = await this.repository.save({ name: data.name });
+    return { id: saved.id };
   }
 
   delete(id: string) {

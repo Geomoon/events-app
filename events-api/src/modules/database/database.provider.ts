@@ -5,12 +5,12 @@ export const databaseProviders = [
     provide: 'DATA_SOURCE',
     useFactory: async () => {
       const dataSource = new DataSource({
-        type: 'mongodb',
+        type: 'postgres',
         host: 'localhost',
-        port: 3306,
-        username: 'root',
-        password: 'root',
-        database: 'test',
+        port: 5432,
+        username: 'postgres',
+        password: 'postgres',
+        database: 'events_db',
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
         synchronize: true,
       });

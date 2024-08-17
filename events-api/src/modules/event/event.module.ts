@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
 import { EventService } from './event.service';
 import { EventController } from './event.controller';
-import { EventFirestoreRepository } from './event.firestore';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Event } from './event.entity';
 
 @Module({
+  imports: [TypeOrmModule.forFeature([Event])],
   controllers: [EventController],
-  providers: [EventService, EventFirestoreRepository],
+  providers: [EventService],
 })
 export class EventModule {}
